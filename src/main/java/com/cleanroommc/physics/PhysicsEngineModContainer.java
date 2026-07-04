@@ -32,6 +32,7 @@ public class PhysicsEngineModContainer extends DummyModContainer {
 
     @Override
     public boolean registerBus(EventBus bus, LoadController controller) {
+        bus.register(new PhysicsKirinoEvents());
         return true;
     }
 }
