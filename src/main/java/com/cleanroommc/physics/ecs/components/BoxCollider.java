@@ -6,7 +6,7 @@ import org.joml.Matrix3f;
 import org.joml.Vector3f;
 
 @CleanComponentSignature
-public class Collider {
+public class BoxCollider {
     OBB boundingBox;
 
     float mass;
