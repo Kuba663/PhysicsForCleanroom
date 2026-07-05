@@ -1,5 +1,6 @@
 package com.cleanroommc.physics;
 
+import com.cleanroommc.kirino.KirinoCommonCore;
 import com.google.common.eventbus.EventBus;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
@@ -9,7 +10,7 @@ import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 import java.util.List;
 import java.util.Set;
 
-public class PhysicsEngineModContainer extends DummyModContainer {
+public final class PhysicsEngineModContainer extends DummyModContainer {
 
     public PhysicsEngineModContainer() {
         super(new ModMetadata());
@@ -32,7 +33,7 @@ public class PhysicsEngineModContainer extends DummyModContainer {
 
     @Override
     public boolean registerBus(EventBus bus, LoadController controller) {
-        bus.register(new PhysicsKirinoEvents());
+        KirinoCommonCore.KIRINO_EVENT_BUS.register(new PhysicsKirinoEvents());
         return true;
     }
 }
