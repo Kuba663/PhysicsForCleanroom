@@ -2,10 +2,15 @@ package com.cleanroommc.physics;
 
 import com.cleanroommc.kirino.KirinoCommonCore;
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import org.lwjgl.system.Configuration;
+import org.lwjgl.system.MemoryStack;
 
 import java.util.List;
 import java.util.Set;
@@ -31,9 +36,23 @@ public final class PhysicsEngineModContainer extends DummyModContainer {
         );
     }
 
+    @Subscribe
+    public void construct(FMLConstructionEvent ev) {
+        Configuration.OPENCL_EXPLICIT_INIT.set(true);
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            PhysicsOpenCL.initOpenCL(stack);
+        }
+    }
+
+    @Subscribe
+    public void preInit(FMLPreInitializationEvent ev) {
+
+    }
+
     @Override
     public boolean registerBus(EventBus bus, LoadController controller) {
         KirinoCommonCore.KIRINO_EVENT_BUS.register(new PhysicsKirinoEvents());
+        bus.register(this);
         return true;
     }
 }
