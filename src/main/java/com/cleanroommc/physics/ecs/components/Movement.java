@@ -6,7 +6,7 @@ import org.joml.Vector3f;
 @CleanComponentSignature
 public class Movement {
     Vector3f linearSpeed;
-    Vector3f rotationalSpeed;
+    Vector3f angularSpeed;
 
     Vector3f force;
     Vector3f torque;
